@@ -1,4 +1,4 @@
-fontcache/previews/*
-fontcache/ttf/*
+fontcache/previews/*.png
+fontcache/ttf/*.ttf
 .settings/
 .project
