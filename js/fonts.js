@@ -83,7 +83,7 @@ var WFBlender	= {
 	 * @param {Object} e
 	 */
 	unselect:			function(e){
-		if(($(e.target).is('html') || $(e.target).is('section#section-home')) && this.$current !== null){
+		if(($(e.target).is('html') || $(e.target).is('section#section-home') || $(e.target).is('li#nav-code') || $(e.target).is('li#nav-about')) && this.$current !== null){
 			this.$current.removeClass('act');
 			this.$noFontSelected.show();
 			this.$fontPanel.hide();

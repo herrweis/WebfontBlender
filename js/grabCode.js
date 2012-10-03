@@ -56,27 +56,31 @@ p{\
 			finalFamilies = [];
 		
 		for(var i = 0, iL = mergedFamilies.length; i < iL; ++i){
-			var family = {
-					familyName: mergedFamilies[i].replace(/'/g, ''),
-					variants: []
-				},
-				mergedVariants = [],
-				variants = [];
-			if(p.fontFamily == mergedFamilies[i]){
-				variants.push(p.fontStyle == 'italic' ? p.fontWeight+''+p.fontStyle : p.fontWeight);
+			if(mergedFamilies[i] != 'Arial, sans-serif'){
+				var family = {
+						familyName: mergedFamilies[i].replace(/'/g, ''),
+						variants: []
+					},
+					mergedVariants = [],
+					variants = [];
+				if(p.fontFamily == mergedFamilies[i]){
+					variants.push(p.fontStyle == 'italic' ? p.fontWeight+''+p.fontStyle : p.fontWeight);
+				}
+				if(h1.fontFamily == mergedFamilies[i]){
+					variants.push(h1.fontStyle == 'italic' ? h1.fontWeight+''+h1.fontStyle : h1.fontWeight);
+				}
+				if(h2.fontFamily == mergedFamilies[i]){
+					variants.push(h2.fontStyle == 'italic' ? h2.fontWeight+''+h2.fontStyle : h2.fontWeight);
+				}
+				mergedVariants = $.grep(variants,function(v,k){
+					return $.inArray(v,variants) === k;
+				});
+				finalFamilies.push(mergedFamilies[i].replace(/'/g, '').replace(/ /g, '+')+(mergedVariants.length ? ':'+mergedVariants.join() : ''));
 			}
-			if(h1.fontFamily == mergedFamilies[i]){
-				variants.push(h1.fontStyle == 'italic' ? h1.fontWeight+''+h1.fontStyle : h1.fontWeight);
-			}
-			if(h2.fontFamily == mergedFamilies[i]){
-				variants.push(h2.fontStyle == 'italic' ? h2.fontWeight+''+h2.fontStyle : h2.fontWeight);
-			}
-			mergedVariants = $.grep(variants,function(v,k){
-				return $.inArray(v,variants) === k;
-			});
-			finalFamilies.push(mergedFamilies[i].replace(/'/g, '').replace(/ /g, '+')+(mergedVariants.length ? ':'+mergedVariants.join() : ''));
 		}
-		$('#code-fontfile').html('&lt;link href="http://fonts.googleapis.com/css?family='+finalFamilies.join('|')+'" rel="stylesheet" type="text/css"&gt;');
+		if(finalFamilies.length){
+			$('#code-fontfile').html('&lt;link href="http://fonts.googleapis.com/css?family='+finalFamilies.join('|')+'" rel="stylesheet" type="text/css"&gt;');
+		}
 	}
 }
 $(document).ready(function(){
