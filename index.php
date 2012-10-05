@@ -111,9 +111,9 @@
 				</ul>
 			</nav>
 			<section id="section-home">
-				<h1 contenteditable="true" data-start-value="2"><span><span>Click me</span> &#xe75e;</span>Welcome to the Web Font Blender</h1>
-				<h2 contenteditable="true" data-start-value="2"><span><span>Click me</span> &#xe75e;</span>A little tool to checkout neat webfont combinations. Obviously we all want to make the web look better, don't we?</h2>
-				<div id="bodytext" data-start-value="0"><span><span>Click me</span> &#xe75e;</span>
+				<h1 contenteditable="true" data-start-value="2"><span><span>Click me</span>&#xe75e;</span>Welcome to the Web Font Blender</h1>
+				<h2 contenteditable="true" data-start-value="2"><span><span>Click me</span>&#xe75e;</span>A little tool to checkout neat webfont combinations. Obviously we all want to make the web look better, don't we?</h2>
+				<div id="bodytext" data-start-value="0"><span><span>Click me</span>&#xe75e;</span>
 					<p contenteditable="true">The usage is pretty simple: Just select the text element you want to style by clicking on it. In the left bar you can change the font family, the size and the line height. For your convenience all measurements are shown in PX, EM and percent, so you can easily copy and paste it in your stylesheets. Of course, you can adjust the body font size (the base size from which all measurements derive) as well as changing the visibility of certain elements in the "Settings" section.</p>
 					<p contenteditable="true">If you found a web font combination suiting your needs you can grab the code on the "Grab codes" page, where you not only find the adequate code to link the web fonts but also the css for the body, h1, h2 and p elements. Happy blending!</p>
 				</div>
