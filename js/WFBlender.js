@@ -20,32 +20,28 @@ var WFBlender	= {
 	 */
 	init:				function(options){
 		this.$elements			= $(options.elements);
-		this.$fontListUl		= $('#google-fonts-list li');
+		this.$fontListUl		= $('#google-fonts-list li[data-font-type]');
 		this.$searchFonts		= $('#search-fonts');
+		this.firstStart			= true;
 		this.inputs				= {
-			$baseFontSize:		$('#body-font-size').change($.proxy(this.setBaseSize, this)),
-			$fontSize:			$('#font-size').change($.proxy(this.changeFontSize, this)),
-			$lineHeight:		$('#line-height').change($.proxy(this.changeLineHeight, this))
+			$baseFontSize:		$('#body-font-size').change($.proxy(this.setBaseSize, this)).click(function(){this.select();}),
+			$fontSize:			$('#font-size').change($.proxy(this.changeFontSize, this)).click(function(){this.select();}),
+			$lineHeight:		$('#line-height').change($.proxy(this.changeLineHeight, this)).click(function(){this.select();})
 		}
 		this.setBaseSize();
 		this.$searchClear		= $('<span id="search-field-clear">&#x2716;</span>').hide();
 		this.$searchFonts.after(this.$searchClear);
 		for(var i = 0, iL = this.$elements.length; i < iL; ++i){
-			var $hideButton = $('<span class="hide icon icon-block">Hide</span>');
-			$hideButton.click($.proxy(this.hideElement, this));
-			$hideButton[0].element = $(this.$elements[i]);
-			
-			$hideButton[0].$li = $('#visible-'+this.$elements[i].tagName.toLowerCase());
-			$hideButton[0].$li[0].element = $(this.$elements[i]);
-			$hideButton[0].$li[0].hideButton = $hideButton;
-			$hideButton[0].$li.click($.proxy(this.toggleElement, this));
-			
-			$(this.$elements[i]).click($.proxy(this.select, this));
-			$(this.$elements[i]).prepend($hideButton);
+			var $li	= $('#visible-'+this.$elements[i].tagName.toLowerCase()),
+				el	= this.$elements[i];
+			$li[0].element = $(el);
+			$li.click($.proxy(this.toggleElement, this));
+			el.WFBlenderConfig = WFBlenderConfig[el.tagName.toLowerCase()];
+			el.li = $(this.$fontListUl[$(el).attr('data-start-value')]);
+			$(el).click($.proxy(this.select, this));
+			$(el).addClass('pulsating');
 		}
 		$(document).click($.proxy(this.unselect, this));
-		$('#google-fonts-list').css({'height': ($('#google-fonts').height())+'px'});
-		$(".nano").nanoScroller();
 		this.$fontListUl.click($.proxy(this.setFontFamily, this));
 		this.$searchFonts.keyup($.proxy(this.searchFonts, this));
 		this.$searchFonts.focus($.proxy(this.searchFontFieldInit, this));
@@ -53,9 +49,7 @@ var WFBlender	= {
 		this.searchFontFieldInit();
 		this.$searchClear.click($.proxy(this.clearSearchField, this));
 		this.$fontPanel			= $('#fontselected').hide();
-		this.$noFontSelected	= $('#nofontselected').show();
-//		this.$fontPanel			= $('#fontselected');
-//		this.$noFontSelected	= $('#nofontselected').hide();
+		this.$noFontSelected	= $('#nofontselected').addClass('initial').show();
 	},
 	/**
 	 * SELECT AN ELEMENT
@@ -63,6 +57,12 @@ var WFBlender	= {
 	 * @param {Object} e
 	 */
 	select:				function(e){
+		if(this.firstStart === true){
+			this.firstStart = false;
+			$('.pulsating > span').remove();
+			$('.pulsating').removeClass('pulsating');
+			this.$noFontSelected.removeClass('initial');
+		}
 		if(this.$current !== null){
 			this.$current.removeClass('act');
 			if(this.$current[0].li){
@@ -121,12 +121,26 @@ var WFBlender	= {
 	 */
 	calculateFontSizeConversions:	function(){
 		this.inputs.$fontSize.next('span').html((this.inputs.$fontSize.val() / this.base).toFixed(3)+'em<br/>'+(this.inputs.$fontSize.val() / this.base * 100).toFixed(1)+'%');
+		if(this.$current){
+			this.$current[0].WFBlenderConfig.fontSize = (this.inputs.$fontSize.val() / this.base).toFixed(3);
+		}
 	},
 	/**
 	 * CALCULATE CONVERSIONS FOR THE LINE HEIGHT
 	 */
 	calculateLineHeightConversions:	function(startValue){
 		this.inputs.$lineHeight.next('span').html((this.inputs.$lineHeight.val() / this.inputs.$fontSize.val()).toFixed(3)+'<br/>'+(this.inputs.$lineHeight.val() / this.inputs.$fontSize.val() * 100).toFixed(1)+'%');
+		if(this.$current){
+			this.$current[0].WFBlenderConfig.lineHeight = (this.inputs.$lineHeight.val() / this.inputs.$fontSize.val()).toFixed(3);
+		}
+	},
+	/**
+	 * CALCULATE CONVERSIONS FOR THE BASE SIZE
+	 */
+	calculateBaseSizeConversions:	function(){
+		var base = window.base_font_size ? window.base_font_size : 16;
+		this.inputs.$baseFontSize.next('span').html((this.base / base).toFixed(3)+'em<br/>'+(this.base / base * 100).toFixed(1)+'%');
+		WFBlenderConfig.baseSize = (this.base / base * 100).toFixed(1);
 	},
 	/**
 	 * SET THE BODY BASE FONT SIZE
@@ -134,6 +148,7 @@ var WFBlender	= {
 	setBaseSize:		function(){
 		this.base		= this.inputs.$baseFontSize.val() ? this.inputs.$baseFontSize.val() : window.base_font_size ? window.base_font_size : 16;
 		$('body').css({'font-size': this.base+'px'});
+		this.calculateBaseSizeConversions();
 		if(this.$current !== null){
 			this.initElementPanel();
 		}
@@ -141,26 +156,33 @@ var WFBlender	= {
 	changeFontSize:		function(){
 		this.$current.css({'font-size': (this.inputs.$fontSize.val() / this.base).toFixed(3)+'em'});
 		this.calculateFontSizeConversions();
+		this.changeLineHeight();
 	},
 	changeLineHeight:	function(){
 		this.$current.css({'line-height': (this.inputs.$lineHeight.val() / this.inputs.$fontSize.val()).toFixed(3)});
 		this.calculateLineHeightConversions();
 	},
 	setFontFamily:		function(e){
-		var li		= e.target,
-			$li		= $(li);
+		var li				= e.target,
+			$li				= $(li)
+			fontFamily		= $li.attr('data-font-family'),
+			fontWeight		= $li.attr('data-font-weight').length && $li.attr('data-font-weight') != 'regular' ? $li.attr('data-font-weight') : 'normal',
+			fontStyle		= $li.attr('data-font-style').length ? $li.attr('data-font-style') : 'normal',
+			variant			= (fontWeight == 'normal' ? '' : fontWeight)+(fontStyle == 'normal' ? '' : fontStyle);
+			fontType		= $li.attr('data-font-type');
 		this.$fontListUl.removeClass('act');
 		$li.addClass('act');
-		if(!li.fontLoaded || li.fontLoaded === false){
+		if((!li.fontLoaded || li.fontLoaded === false) && $li.attr('data-font-type') != 'system'){
 			$('head').prepend('<link href="http://fonts.googleapis.com/css?family='+$li.attr('data-font-url')+'" type="text/css" rel="stylesheet"/>');
 			li.fontLoaded = true;
 		}
 		this.$current[0].li = $li;
 		this.$current.css({
-			'font-family':	$li.attr('data-font-family'),
-			'font-weight':	$li.attr('data-font-weight').length && $li.attr('data-font-weight') != 'regular' ? $li.attr('data-font-weight') : 'normal',
-			'font-style':	$li.attr('data-font-style').length ? $li.attr('data-font-style') : 'normal'
+			'font-family':	fontFamily,
+			'font-weight':	fontWeight,
+			'font-style':	fontStyle
 		});
+		WFBlenderConfig.setFamily(this.$current[0].WFBlenderConfig, fontFamily, fontType, fontWeight, fontStyle, variant);
 	},
 	searchFontFieldInit:	function(e, noRestore){
 		if(!noRestore){
@@ -192,7 +214,6 @@ var WFBlender	= {
 			this.$searchClear.hide();
 			this.$searchClear.data('visible', 0);
 		}
-		$(".nano").nanoScroller();
 	},
 	clearSearchField:	function(){
 		this.$searchFonts.val('');
@@ -200,27 +221,14 @@ var WFBlender	= {
 		this.$fontListUl.show();
 		this.$searchClear.hide();
 		this.$searchClear.data('visible', 0);
-		$(".nano").nanoScroller();
-	},
-	hideElement:		function(e){
-		e.stopPropagation();
-		$(e.target.element).hide();
-		var $toggler	= null;
-		if(e.target.$li){
-			$toggler	= e.target.$li;
-		} else{
-			$toggler	= $(e.target);
-		}
-		$toggler.removeClass('icon-ok');
-		$toggler.addClass('icon-block');
 	},
 	toggleElement:		function(e){
 		if($(e.target).hasClass('icon-block')){
-			$(e.target).removeClass('icon-block');
-			$(e.target).addClass('icon-ok');
+			$(e.target).removeClass('icon-block').addClass('icon-ok');
 			$(e.target.element).show();
 		} else{
-			this.hideElement(e);
+			$(e.target).removeClass('icon-ok').addClass('icon-block');
+			$(e.target.element).hide();
 		}
 	}
 }
