@@ -140,7 +140,9 @@ p{
 			<section id="section-about">
 				<h1>About the Blender</h1>
 				<p>Although there are pages like <a href="http://font-combinator.com/">The Web Font Combinator</a> and <a href="http://pxtoem.com/">PXtoEM</a> I felt the need of a tool combining certain functions I personally need nearly every day. So I came up with the Web Font Blender. Hopefully you find this tool as helpful as I do.</p>
-				<p>Designed and developed by <a href="http://andreasweis.com/portfolio/en.html">Andreas Weis</a>. Checkout the code on <a href="https://github.com/herrweis/WebfontBlender">Github</a>.</p>
+				<p>Designed and developed by <a href="http://andreasweis.com/portfolio/en.html">Andreas Weis</a>. Checkout the code on <a href="https://github.com/herrweis/WebfontBlender">Github</a>. If you find a bug please feel free to email me <a href="mailto:post@andreasweis.com">post@andreasweis.com</a></p>
+				<h2>Beware</h2>
+				<p>This site was tested with the latest versions of Chrome, Safari and Firefox. I just hate IE...</p>
 				<h2>Credits</h2>
 				<p><a href="http://chipcullen.com/">Chip Cullen</a> for his inspiring <a href="http://font-combinator.com/">Web Font Combinator</a></p>
 				<p><a href="http://briancray.com/">Brian Cray</a> for <a href="http://pxtoem.com/">PXtoEM</a> - one of the most useful tools for font unit conversions</p>
