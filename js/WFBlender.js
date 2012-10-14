@@ -235,6 +235,9 @@ var WFBlender	= {
 
 
 $(document).ready(function(){
+	if($(window).width() < 1025){
+		$('*[contenteditable=true]').attr('contenteditable', 'false');
+	}
 	WFBlender.init({
 		elements: '#section-home h1, #section-home h2, #section-home div'
 	});

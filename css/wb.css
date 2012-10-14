@@ -469,3 +469,12 @@ span.hide:hover{
 .icon-search:before { content: '🔍'; } /* '\1f50d' */
 .icon-clock:before { content: '🕔'; } /* '\1f554' */
 .icon-block:before { content: '🚫'; } /* '\1f6ab' */
+
+/** -------------------------------------------------------
+ * 	MEDIA QUERIES (CURRENTLY FOR IPAD LANDSCAPE ONLY)
+ ---------------------------------------------------------- */
+@media screen and (max-width: 1024px) {
+	#content > section{
+		padding: 5em 6em 0 6em;
+	}
+}
