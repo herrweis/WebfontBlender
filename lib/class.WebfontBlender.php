@@ -35,12 +35,38 @@
 								'style'			=> $style,
 							);
 							$this->_fontList[]	= $font;
-							if(!@file_exists('fontcache/ttf/'.$font['fileName'])){
-								$fontCss		= file_get_contents('http://fonts.googleapis.com/css?family='.$font['urlEncoded'].'&subset=latin');
-								preg_match('%url\((.*?)\)%', $fontCss, $fontFile);
-								if(count($fontFile == 2)){
-									$fontFile	= file_get_contents($fontFile[1]);
-									file_put_contents('fontcache/ttf/'.$font['fileName'], $fontFile);
+							
+							$fontCss		= file_get_contents('http://fonts.googleapis.com/css?family='.$font['urlEncoded'].'&subset=latin');
+							preg_match('%url\((.*?)\)%', $fontCss, $fontFile);
+							if(count($fontFile == 2)){								
+								$url			= parse_url($fontFile[1]);
+								$headers		= array();
+								
+								$fp				= fsockopen ( $url['host'], 80, $errno, $errstr, 1 );
+								if($fp) {
+									stream_set_timeout($fp, 1);
+									$out		= "HEAD ".$url['path']." HTTP/1.1\r\n";
+									$out		.= "Host: ".$url['host']."\r\n";
+									$out		.= "Connection: Close\r\n\r\n";
+									if (fwrite($fp, $out)){
+										$headers	= array();
+										$body		= '';
+										while(!feof($fp)){
+ 											$line	= trim ( fgets ( $fp, 128 ) );
+											if(!strlen($line)){
+												break;
+											}
+											list($header, $value) = explode(':', $line, 2);
+											$headers[strtolower(trim($header))] = trim($value);
+										}
+										fclose ($fp);
+									}
+								}
+								if(count($headers) && array_key_exists('last-modified', $headers)){
+									if(!@file_exists('fontcache/ttf/'.$font['fileName']) || filemtime('fontcache/ttf/'.$font['fileName']) < strtotime($headers['last-modified'])){
+										$fontFile	= file_get_contents($fontFile[1]);
+										file_put_contents('fontcache/ttf/'.$font['fileName'], $fontFile);
+									}
 								}
 							}
 						}

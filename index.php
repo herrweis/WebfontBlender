@@ -19,12 +19,6 @@
 		<link rel="shortcut icon" href="favicon.ico" />
 		<link rel="stylesheet" type="text/css" href="css/normalize.css"/>
 		<link rel="stylesheet" type="text/css" href="css/wb.css"/>
-		
-		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js" type="text/javascript"></script>
-		<script src="js/tabs.js" type="text/javascript"></script>
-		<script src="js/WFBlenderConfig.js" type="text/javascript"></script>
-		<script src="js/WFBlender.js" type="text/javascript"></script>
-		<script src="js/grabCode.js" type="text/javascript"></script>
 	</head>
 
 	<body spellcheck="false">
@@ -145,5 +139,10 @@ p{
 				<p><a href="http://tollwerk.de">Joschi Kuphal</a> for showing me the right path how to solve the font cache problem.</p>
 			</section>
 		</div>
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js" type="text/javascript"></script>
+		<script src="js/tabs.js" type="text/javascript"></script>
+		<script src="js/WFBlenderConfig.js" type="text/javascript"></script>
+		<script src="js/WFBlender.js" type="text/javascript"></script>
+		<script src="js/grabCode.js" type="text/javascript"></script>
 	</body>
 </html>
