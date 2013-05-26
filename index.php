@@ -19,6 +19,13 @@
 		<link rel="shortcut icon" href="favicon.ico" />
 		<link rel="stylesheet" type="text/css" href="css/normalize.css"/>
 		<link rel="stylesheet" type="text/css" href="css/wb.css"/>
+		
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js" type="text/javascript"></script>
+		<script src="http://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js"></script>
+		<script src="js/tabs.js" type="text/javascript"></script>
+		<script src="js/WFBlenderConfig.js" type="text/javascript"></script>
+		<script src="js/WFBlender.js" type="text/javascript"></script>
+		<script src="js/grabCode.js" type="text/javascript"></script>
 	</head>
 
 	<body spellcheck="false">
@@ -130,7 +137,7 @@ p{
 			<section id="section-about">
 				<h1>About the Blender</h1>
 				<p>Although there are pages like <a href="http://font-combinator.com/">The Web Font Combinator</a> and <a href="http://pxtoem.com/">PXtoEM</a> I felt the need of a tool combining certain functions I personally need nearly every day. So I came up with the Web Font Blender. Hopefully you find this tool as helpful as I do.</p>
-				<p>Designed and developed by <a href="http://andreasweis.com/portfolio/en.html">Andreas Weis</a>. Checkout the code on <a href="https://github.com/herrweis/WebfontBlender">Github</a>. If you find a bug please feel free to email me <a href="mailto:post@andreasweis.com">post@andreasweis.com</a></p>
+				<p>Designed and developed by <a href="http://andreasweis.com/">Andreas Weis</a>. Checkout the code on <a href="https://github.com/herrweis/WebfontBlender">Github</a>. If you find a bug please feel free to email me <a href="mailto:post@andreasweis.com">post@andreasweis.com</a></p>
 				<h2>Beware</h2>
 				<p>This site was tested with the latest versions of Chrome, Safari and Firefox. I just hate IE...</p>
 				<h2>Credits</h2>
@@ -139,10 +146,6 @@ p{
 				<p><a href="http://tollwerk.de">Joschi Kuphal</a> for showing me the right path how to solve the font cache problem.</p>
 			</section>
 		</div>
-		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js" type="text/javascript"></script>
-		<script src="js/tabs.js" type="text/javascript"></script>
-		<script src="js/WFBlenderConfig.js" type="text/javascript"></script>
-		<script src="js/WFBlender.js" type="text/javascript"></script>
-		<script src="js/grabCode.js" type="text/javascript"></script>
+		<script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');ga('create', 'UA-18291047-2', 'andreasweis.com');ga('send', 'pageview');</script>
 	</body>
 </html>

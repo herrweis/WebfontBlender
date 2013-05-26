@@ -13,6 +13,8 @@ var WFBlender	= {
 	completeFontList:	{},
 	headTag:			null,
 	$searchFonts:		null,
+	$savePanel:			$('<ul id="save-panel" />'),
+	$addCombination:	$('<li id="add-combination"><span class="icon-plus">Save this blend</span></li>'),
 	/**
 	 * INITALIZE
 	 * 
@@ -41,6 +43,9 @@ var WFBlender	= {
 			$(el).click($.proxy(this.select, this));
 			$(el).addClass('pulsating');
 		}
+		this.$addCombination.click($.proxy(this.addConfig, this));
+		this.$savePanel.append(this.$addCombination);
+		$('#section-home').append(this.$savePanel);
 		$(document).click($.proxy(this.unselect, this));
 		this.$fontListUl.click($.proxy(this.setFontFamily, this));
 		this.$searchFonts.keyup($.proxy(this.searchFonts, this));
@@ -173,7 +178,12 @@ var WFBlender	= {
 		this.$fontListUl.removeClass('act');
 		$li.addClass('act');
 		if((!li.fontLoaded || li.fontLoaded === false) && $li.attr('data-font-type') != 'system'){
-			$('head').prepend('<link href="http://fonts.googleapis.com/css?family='+$li.attr('data-font-url')+'" type="text/css" rel="stylesheet"/>');
+			//$('head').prepend('<link href="http://fonts.googleapis.com/css?family='+$li.attr('data-font-url')+'" type="text/css" rel="stylesheet"/>');
+			WebFont.load({
+				google: {
+					families: [$li.attr('data-font-url')]
+				}
+			});
 			li.fontLoaded = true;
 		}
 		this.$current[0].li = $li;
@@ -230,6 +240,52 @@ var WFBlender	= {
 			$(e.target).removeClass('icon-ok').addClass('icon-block');
 			$(e.target.element).hide();
 		}
+	},
+	loadConfig:			function(e){
+		e.preventDefault();
+		var config		= e.currentTarget.config,
+			base		= window.base_font_size ? window.base_font_size : 16;
+		
+		this.inputs.$baseFontSize.val(config.baseSize / 100 * base);
+		this.setBaseSize();
+		
+		for(var i = 0, iL = this.$elements.length; i < iL; ++i){
+			var $li	= $('#visible-'+this.$elements[i].tagName.toLowerCase()),
+				el	= this.$elements[i],
+				obj	= config[el.tagName.toLowerCase()];
+			$(el).trigger('click');
+			
+			this.inputs.$fontSize.val(this.base *  obj.fontSize);
+			this.changeFontSize();
+			
+			this.inputs.$lineHeight.val(this.inputs.$fontSize.val() *  obj.lineHeight);
+			this.changeLineHeight();
+			
+			if(obj.type != 'system'){
+				$('li[data-font-url="'+obj.fontFamily.replace(/ /g, '+')+(obj.variant.length ? '%3A'+obj.variant : '%3Aregular')+'"]').trigger('click');
+			} else{
+				// select system font
+				$('li[data-font-family="'+obj.fontFamily+'"][data-font-weight="'+(obj.fontWeight.length ? obj.fontWeight : 'normal')+'"][data-font-style="'+obj.fontStyle+'"]').trigger('click');
+			}
+		}
+		
+		this.$current.removeClass('act');
+		this.$noFontSelected.show();
+		this.$fontPanel.hide();
+	},
+	addConfig:			function(){
+		var $newLi			= $('<li><span>'+WFBlenderConfig.h1.fontFamily+'<br/>'+WFBlenderConfig.h2.fontFamily+'<br/>'+WFBlenderConfig.div.fontFamily+'</span></li>'),
+			$closeSpan		= $('<span class="delete">✖</span>'),
+			savedConfig		= jQuery.extend(true, {}, WFBlenderConfig);
+		$newLi.append($closeSpan);
+		$newLi[0].config	= savedConfig;
+		$newLi.click($.proxy(this.loadConfig, this));
+		$closeSpan.click($.proxy(this.deleteConfig, this));
+		this.$savePanel.append($newLi);
+	},
+	deleteConfig:		function(e){
+		e.stopPropagation();
+		$(e.currentTarget).parent().remove();
 	}
 }
 

@@ -167,7 +167,9 @@ var WFBlender	= {
 		if(!noRestore){
 			if(this.$searchFonts.val() == ''){
 				this.$searchFonts.val(this.$searchFonts.attr('data-origvalue'));
-				this.$searchFonts.addClass('orig');
+				var $tempList = this.$searchFonts.detach();
+				$tempList.addClass('orig');
+				this.$fontListUl.append($tempList);
 			} else if(this.$searchFonts.val() == this.$searchFonts.attr('data-origvalue')){
 				this.$searchFonts.removeClass('orig');
 				this.$searchFonts.val('');

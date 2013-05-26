@@ -1,7 +1,7 @@
 var WFBlenderConfig		= {
 	baseSize:			100,
 	div: {
-		fontFamily:		'Arial, sans-serif',
+		fontFamily:		'Arial',
 		fontSize:		1.000,
 		lineHeight:		1.563,
 		fontWeight:		'',
@@ -10,16 +10,16 @@ var WFBlenderConfig		= {
 		type:			'system'
 	},
 	h1: {
-		fontFamily:		'Arial, sans-serif',
+		fontFamily:		'Arial',
 		fontSize:		2.500,
 		lineHeight:		1.000,
-		fontWeight:		'',
+		fontWeight:		'bold',
 		fontStyle:		'',
 		variant:		'',
 		type:			'system'
 	},
 	h2: {
-		fontFamily:		'Arial, sans-serif',
+		fontFamily:		'Arial',
 		fontSize:		1.500,
 		lineHeight:		1.563,
 		fontWeight:		'',

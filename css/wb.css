@@ -296,9 +296,11 @@ input{
 #section-home h1{
 	line-height: 1;
 	position: relative;
+	margin: 0 0 .5em 0;
 }
 #section-home h2{
 	line-height: 1.4;
+	margin: 0 0 0 0;
 	position: relative;
 }
 #section-home div{
@@ -317,6 +319,7 @@ input{
 }
 #bodytext p{
 	outline: none;
+	margin: 1em 0;
 }
 span.hide{
 	display: none;
@@ -341,6 +344,81 @@ span.hide{
 span.hide:hover{
 	background-color: #000000;
 }
+/** -------------------------------------------------------
+ * 	SAVE PANEL
+ ---------------------------------------------------------- */
+#save-panel{
+	position: fixed;
+	bottom: 0;
+	left: 300px;
+	right: 0;
+	overflow: auto;
+	height: 60px;
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	
+	-webkit-box-shadow: inset 0em 0.2em .5em rgba(0,0,0,0.2);
+	-moz-box-shadow: inset 0em 0.2em .5em rgba(0,0,0,0.2);
+	-ms-box-shadow: inset 0em 0.2em .5em rgba(0,0,0,0.2);
+	box-shadow: inset 0em 0.2em .5em rgba(0,0,0,0.2);
+	
+	background: -moz-linear-gradient(top,  #666666 0%, #999999 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#666666), color-stop(100%,#999999)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top,  #666666 0%,#999999 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top,  #666666 0%,#999999 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top,  #666666 0%,#999999 100%); /* IE10+ */
+	background: linear-gradient(to bottom,  #666666 0%,#999999 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#666666', endColorstr='#999999',GradientType=0 ); /* IE6-9 */
+}
+#save-panel li{
+	display: inline-block;
+	height: 60px;
+	width: 100px;
+	line-height: 60px;
+	text-align: center;
+	cursor: pointer;
+	font-size: 11px;
+	text-shadow: -1px -1px 0 rgba(0, 0, 0, 0.2);
+	color: #fff;
+	position: relative;
+}
+#save-panel li:hover{
+	background-color: #00C0FF;
+	color: #fff;
+}
+#save-panel li span{
+	vertical-align: middle;
+	display: inline-block;
+	line-height: 1;
+}
+#save-panel li span.delete{
+	position: absolute;
+	top: 5px;
+	right: 5px;
+	font-family: 'fontello';
+	font-style: normal;
+	font-weight: normal;
+	speak: none;
+	display: none;
+	text-decoration: inherit;
+	width: 1em;
+	text-align: center;
+	vertical-align: top;
+	line-height: 1;
+	font-size: 1.5em;
+}
+#save-panel li:hover span.delete{
+	display: block;
+}
+#save-panel li#add-combination span[class^="icon-"]:before{
+	display: block;
+	text-align: center;
+	width: 100%;
+	margin: 0 0 .5em 0;
+	font-size: 18px;
+}
+
 /** -------------------------------------------------------
  * 	START ANIMATION
  ---------------------------------------------------------- */
