@@ -55,6 +55,8 @@ var WFBlender	= {
 		this.$searchClear.click($.proxy(this.clearSearchField, this));
 		this.$fontPanel			= $('#fontselected').hide();
 		this.$noFontSelected	= $('#nofontselected').addClass('initial').show();
+		
+		//this.loadConfig(false, WFBlenderConfig);
 	},
 	/**
 	 * SELECT AN ELEMENT
@@ -241,9 +243,11 @@ var WFBlender	= {
 			$(e.target.element).hide();
 		}
 	},
-	loadConfig:			function(e){
-		e.preventDefault();
-		var config		= e.currentTarget.config,
+	loadConfig:			function(e, config){
+		if(e){
+			e.preventDefault();
+		}
+		var config		= e ? e.currentTarget.config : config,
 			base		= window.base_font_size ? window.base_font_size : 16;
 		
 		this.inputs.$baseFontSize.val(config.baseSize / 100 * base);
