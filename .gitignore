@@ -4,3 +4,4 @@ fontcache/ttf/*
 js/WFBlenderConfig.js.orig
 .project
 2do.txt
+.DS_store

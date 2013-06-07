@@ -10,6 +10,7 @@ var WFBlender	= {
 	settings:			null,
 	$noFontSelected:	null,
 	$fontListUl:		null,
+	$fontFamilySelector: null,
 	completeFontList:	{},
 	headTag:			null,
 	$searchFonts:		null,
@@ -24,6 +25,7 @@ var WFBlender	= {
 		this.$elements			= $(options.elements);
 		this.$fontListUl		= $('#google-fonts-list li[data-font-type]');
 		this.$searchFonts		= $('#search-fonts');
+		this.$fontFamilySelector	= $('#font-family-selector');
 		this.firstStart			= true;
 		this.inputs				= {
 			$baseFontSize:		$('#body-font-size').change($.proxy(this.setBaseSize, this)).click(function(){this.select();}),
@@ -56,7 +58,21 @@ var WFBlender	= {
 		this.$fontPanel			= $('#fontselected').hide();
 		this.$noFontSelected	= $('#nofontselected').addClass('initial').show();
 		
+		this.$fontFamilySelector.on('mouseenter', $.proxy(this.openFontFamilySelector, this));
+		this.$fontFamilySelector.on('mouseleave', $.proxy(this.closeFontFamilySelector, this));
 		//this.loadConfig(false, WFBlenderConfig);
+	},
+	/**
+	 * MAKE THE FONT SELECTOR PANEL BIGGER
+	 */
+	openFontFamilySelector:	function(e){
+		this.$fontPanel.addClass('selector-open');
+	},
+	/**
+	 * MAKE THE FONT SELECTOR PANEL SMALLER
+	 */
+	closeFontFamilySelector:	function(e){
+		this.$fontPanel.removeClass('selector-open');
 	},
 	/**
 	 * SELECT AN ELEMENT
@@ -228,7 +244,7 @@ var WFBlender	= {
 		}
 	},
 	clearSearchField:	function(){
-		this.$searchFonts.val('');
+		this.$searchFonts.val(this.$searchFonts.attr('data-origvalue'));
 		this.$searchFonts.trigger('focus', 1);
 		this.$fontListUl.show();
 		this.$searchClear.hide();

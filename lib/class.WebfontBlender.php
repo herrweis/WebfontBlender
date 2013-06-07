@@ -12,6 +12,11 @@
 		}
 		
 		public function cacheFonts($apiKey){
+			if(!@is_dir('fontcache')){
+				mkdir('fontcache');
+				mkdir('fontcache/previews');
+				mkdir('fontcache/ttf');
+			}
 			$json			= file_get_contents('https://www.googleapis.com/webfonts/v1/webfonts?key='.$apiKey);
 			if(strlen(trim($json))){
 				$fontList	= json_decode($json);

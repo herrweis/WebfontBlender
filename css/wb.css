@@ -64,6 +64,7 @@ input{
 #search-fonts{
 	width: 260px;
 	text-align: left;
+	margin-top: 20px;
 }
 #search-fonts.orig{
 	color: #ccc;
@@ -80,7 +81,7 @@ input{
 	cursor: pointer;
 	color: #999999;
 	top: 5px;
-	right: 15px;
+	right: 35px;
 }
 #search-field-clear:hover{
 	color: #00C0FF;
@@ -119,12 +120,38 @@ input{
 	margin: 0 0 0 50px;
 	vertical-align: middle;
 }
-#google-fonts{
+#panel .panel-toggle{
+	overflow: hidden;
+	-webkit-transition: height 0.3s ease;
+	-moz-transition: height 0.3s ease;
+	-ms-transition: height 0.3s ease;
+	-o-transition: height 0.3s ease;
+	transition: height 0.3s ease;
+}
+#panel .selector-open .panel-toggle{
+	height: 0;
+}
+#font-family-selector{
 	position: absolute;
+	top: 290px;
+	width: 300px;
+	left: 0;
+	bottom: 0;
+	-webkit-transition: top 0.3s ease;
+	-moz-transition: top 0.3s ease;
+	-ms-transition: top 0.3s ease;
+	-o-transition: top 0.3s ease;
+	transition: top 0.3s ease;
+}
+.selector-open #font-family-selector{
+	top: 110px;
+}
+#google-fonts{
 	margin: 0;
 	border-top: 1px solid #e0e0e0;
-	top: 310px;
 	bottom: 0;
+	top: 0;
+	position: absolute;
 	height: auto;
 	width: 300px;
 	left: 0;

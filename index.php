@@ -13,7 +13,7 @@
 		<meta name="description" content="" />
 		<meta name="author" content="Andreas Weis" />
 
-		<meta name="viewport" content="width=device-width; initial-scale=1.0" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
 
 		<!-- Replace favicon.ico & apple-touch-icon.png in the root of your domain and delete these references -->
 		<link rel="shortcut icon" href="favicon.ico" />
@@ -41,47 +41,50 @@
 					<p>Please select a headline or a paragraph.</p>
 				</div>
 				<div id="fontselected">
-					<h2>Font size</h2>
-					<div>
-						<input type="text" id="font-size" /> px
-						<span class="conversion">1.000em<br/>100%</span>
-					</div>
-					<h2>Line height</h2>
-					<div>
-						<input type="text" id="line-height" /> px
-						<span class="conversion">24px<br/>160%</span>
-					</div>
-					<h2>Font family</h2>
 					<div id="font-search">
 						<input type="text" id="search-fonts" data-origvalue="Search fonts ..."/>
 					</div>
-					<div id="google-fonts" class="nano">
-						<ul class="content" id="google-fonts-list">
-							<li class="headline">System fonts</li>
-							<li data-font-type="system" data-font-name="Arial" data-font-family="Arial" data-font-weight="normal" data-font-style="" style="font-family: Arial;">Arial</li>
-							<li data-font-type="system" data-font-name="Arial" data-font-family="Arial" data-font-weight="normal" data-font-style="italic" style="font-family: Arial; font-style: italic;">Arial Italic</li>
-							<li data-font-type="system" data-font-name="Arial" data-font-family="Arial" data-font-weight="bold" data-font-style="" style="font-family: Arial; font-weight: bold;">Arial Bold</li>
-							<li data-font-type="system" data-font-name="Arial" data-font-family="Arial" data-font-weight="bold" data-font-style="italic" style="font-family: Arial; font-weight: bold; font-style: italic;">Arial BoldItalic</li>
-							<li data-font-type="system" data-font-name="Georgia" data-font-family="Georgia" data-font-weight="normal" data-font-style="" style="font-family: 'Georgia';">Georgia</li>
-							<li data-font-type="system" data-font-name="Georgia" data-font-family="Georgia" data-font-weight="normal" data-font-style="italic" style="font-family: 'Georgia'; font-style: italic;">Georgia Italic</li>
-							<li data-font-type="system" data-font-name="Georgia" data-font-family="Georgia" data-font-weight="bold" data-font-style="" style="font-family: 'Georgia'; font-weight: bold;">Georgia Bold</li>
-							<li data-font-type="system" data-font-name="Georgia" data-font-family="Georgia" data-font-weight="bold" data-font-style="italic" style="font-family: 'Georgia'; font-weight: bold; font-style: italic;">Georgia BoldItalic</li>
-							<li data-font-type="system" data-font-name="Times New Roman" data-font-family="Times New Roman" data-font-weight="normal" data-font-style="" style="font-family: 'Times New Roman';">Times New Roman</li>
-							<li data-font-type="system" data-font-name="Times New Roman" data-font-family="Times New Roman" data-font-weight="normal" data-font-style="italic" style="font-family: 'Times New Roman'; font-style: italic;">Times New Roman Italic</li>
-							<li data-font-type="system" data-font-name="Times New Roman" data-font-family="Times New Roman" data-font-weight="bold" data-font-style="" style="font-family: 'Times New Roman'; font-weight: bold;">Times New Roman Bold</li>
-							<li data-font-type="system" data-font-name="Times New Roman" data-font-family="Times New Roman" data-font-weight="bold" data-font-style="italic" style="font-family: 'Times New Roman'; font-weight: bold; font-style: italic;">Times New Roman BoldItalic</li>
-							<li data-font-type="system" data-font-name="Trebuchet MS" data-font-family="Trebuchet MS" data-font-weight="normal" data-font-style="" style="font-family: 'Trebuchet MS';">Trebuchet MS</li>
-							<li data-font-type="system" data-font-name="Trebuchet MS" data-font-family="Trebuchet MS" data-font-weight="normal" data-font-style="italic" style="font-family: 'Trebuchet MS'; font-style: italic;">Trebuchet MS Italic</li>
-							<li data-font-type="system" data-font-name="Trebuchet MS" data-font-family="Trebuchet MS" data-font-weight="bold" data-font-style="" style="font-family: 'Trebuchet MS'; font-weight: bold;">Trebuchet MS Bold</li>
-							<li data-font-type="system" data-font-name="Trebuchet MS" data-font-family="Trebuchet MS" data-font-weight="bold" data-font-style="italic" style="font-family: 'Trebuchet MS'; font-weight: bold; font-style: italic;">Trebuchet MS BoldItalic</li>
-							<li data-font-type="system" data-font-name="Verdana" data-font-family="Verdana" data-font-weight="normal" data-font-style="" style="font-family: 'Verdana';">Verdana</li>
-							<li data-font-type="system" data-font-name="Verdana" data-font-family="Verdana" data-font-weight="normal" data-font-style="italic" style="font-family: 'Verdana'; font-style: italic;">Verdana Italic</li>
-							<li data-font-type="system" data-font-name="Verdana" data-font-family="Verdana" data-font-weight="bold" data-font-style="" style="font-family: 'Verdana'; font-weight: bold;">Verdana Bold</li>
-							<li data-font-type="system" data-font-name="Verdana" data-font-family="Verdana" data-font-weight="bold" data-font-style="italic" style="font-family: 'Verdana'; font-weight: bold; font-style: italic;">Verdana BoldItalic</li>
-							<li class="headline">Google web fonts</li>
-							<?php foreach($fontList as $font):?>
-							<li data-font-type="google" data-font-name="<?php echo strtolower($font->name);?>" data-font-url="<?php echo $font->urlEncoded; ?>" data-font-family="<?php echo $font->family; ?>" data-font-weight="<?php echo $font->weight; ?>" data-font-style="<?php echo $font->style; ?>" style="background-image: url(fontcache/previews/<?php echo $font->fileName; ?>.png)"><?php echo $font->name;?></li>
-						<?php endforeach;?></ul>
+					<div class="panel-toggle">
+						<h2>Font size</h2>
+						<div>
+							<input type="text" id="font-size" /> px
+							<span class="conversion">1.000em<br/>100%</span>
+						</div>
+						<h2>Line height</h2>
+						<div>
+							<input type="text" id="line-height" /> px
+							<span class="conversion">24px<br/>160%</span>
+						</div>
+					</div>
+					<div id="font-family-selector">
+						<div id="google-fonts" class="nano">
+							<ul class="content" id="google-fonts-list">
+								<li class="headline">System fonts</li>
+								<li data-font-type="system" data-font-name="Arial" data-font-family="Arial" data-font-weight="normal" data-font-style="" style="font-family: Arial;">Arial</li>
+								<li data-font-type="system" data-font-name="Arial" data-font-family="Arial" data-font-weight="normal" data-font-style="italic" style="font-family: Arial; font-style: italic;">Arial Italic</li>
+								<li data-font-type="system" data-font-name="Arial" data-font-family="Arial" data-font-weight="bold" data-font-style="" style="font-family: Arial; font-weight: bold;">Arial Bold</li>
+								<li data-font-type="system" data-font-name="Arial" data-font-family="Arial" data-font-weight="bold" data-font-style="italic" style="font-family: Arial; font-weight: bold; font-style: italic;">Arial BoldItalic</li>
+								<li data-font-type="system" data-font-name="Georgia" data-font-family="Georgia" data-font-weight="normal" data-font-style="" style="font-family: 'Georgia';">Georgia</li>
+								<li data-font-type="system" data-font-name="Georgia" data-font-family="Georgia" data-font-weight="normal" data-font-style="italic" style="font-family: 'Georgia'; font-style: italic;">Georgia Italic</li>
+								<li data-font-type="system" data-font-name="Georgia" data-font-family="Georgia" data-font-weight="bold" data-font-style="" style="font-family: 'Georgia'; font-weight: bold;">Georgia Bold</li>
+								<li data-font-type="system" data-font-name="Georgia" data-font-family="Georgia" data-font-weight="bold" data-font-style="italic" style="font-family: 'Georgia'; font-weight: bold; font-style: italic;">Georgia BoldItalic</li>
+								<li data-font-type="system" data-font-name="Times New Roman" data-font-family="Times New Roman" data-font-weight="normal" data-font-style="" style="font-family: 'Times New Roman';">Times New Roman</li>
+								<li data-font-type="system" data-font-name="Times New Roman" data-font-family="Times New Roman" data-font-weight="normal" data-font-style="italic" style="font-family: 'Times New Roman'; font-style: italic;">Times New Roman Italic</li>
+								<li data-font-type="system" data-font-name="Times New Roman" data-font-family="Times New Roman" data-font-weight="bold" data-font-style="" style="font-family: 'Times New Roman'; font-weight: bold;">Times New Roman Bold</li>
+								<li data-font-type="system" data-font-name="Times New Roman" data-font-family="Times New Roman" data-font-weight="bold" data-font-style="italic" style="font-family: 'Times New Roman'; font-weight: bold; font-style: italic;">Times New Roman BoldItalic</li>
+								<li data-font-type="system" data-font-name="Trebuchet MS" data-font-family="Trebuchet MS" data-font-weight="normal" data-font-style="" style="font-family: 'Trebuchet MS';">Trebuchet MS</li>
+								<li data-font-type="system" data-font-name="Trebuchet MS" data-font-family="Trebuchet MS" data-font-weight="normal" data-font-style="italic" style="font-family: 'Trebuchet MS'; font-style: italic;">Trebuchet MS Italic</li>
+								<li data-font-type="system" data-font-name="Trebuchet MS" data-font-family="Trebuchet MS" data-font-weight="bold" data-font-style="" style="font-family: 'Trebuchet MS'; font-weight: bold;">Trebuchet MS Bold</li>
+								<li data-font-type="system" data-font-name="Trebuchet MS" data-font-family="Trebuchet MS" data-font-weight="bold" data-font-style="italic" style="font-family: 'Trebuchet MS'; font-weight: bold; font-style: italic;">Trebuchet MS BoldItalic</li>
+								<li data-font-type="system" data-font-name="Verdana" data-font-family="Verdana" data-font-weight="normal" data-font-style="" style="font-family: 'Verdana';">Verdana</li>
+								<li data-font-type="system" data-font-name="Verdana" data-font-family="Verdana" data-font-weight="normal" data-font-style="italic" style="font-family: 'Verdana'; font-style: italic;">Verdana Italic</li>
+								<li data-font-type="system" data-font-name="Verdana" data-font-family="Verdana" data-font-weight="bold" data-font-style="" style="font-family: 'Verdana'; font-weight: bold;">Verdana Bold</li>
+								<li data-font-type="system" data-font-name="Verdana" data-font-family="Verdana" data-font-weight="bold" data-font-style="italic" style="font-family: 'Verdana'; font-weight: bold; font-style: italic;">Verdana BoldItalic</li>
+								<li class="headline">Google web fonts</li>
+								<?php foreach($fontList as $font):?>
+								<li data-font-type="google" data-font-name="<?php echo strtolower($font->name);?>" data-font-url="<?php echo $font->urlEncoded; ?>" data-font-family="<?php echo $font->family; ?>" data-font-weight="<?php echo $font->weight; ?>" data-font-style="<?php echo $font->style; ?>" style="background-image: url(fontcache/previews/<?php echo $font->fileName; ?>.png)"><?php echo $font->name;?></li>
+							<?php endforeach;?></ul>
+						</div>
 					</div>
 				</div>
 			</section>
